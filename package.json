@@ -12,8 +12,9 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start:dev": "concurrently \"node proxy-server.js\" \"PORT=3000 npm run start\"",
+    "start": "env-cmd -f .env react-scripts start",
+    "build:prod": "node ./update-build.js && react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -34,5 +35,11 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "devDependencies": {
+    "concurrently": "^6.0.1",
+    "env-cmd": "^10.1.0",
+    "http-proxy": "^1.18.1"
+  },
+  "buildDate": 1617723164684
 }
