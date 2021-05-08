@@ -1,4 +1,4 @@
-const DOMAIN = process.env.REACT_APP_DOMAIN || 'prunedge.com';
+export const DOMAIN = process.env.REACT_APP_DOMAIN || 'localhost:3000';
 
 export const getSubdomain = () => {
     let hostname = window.location.hostname.toLowerCase();
