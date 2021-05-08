@@ -2,15 +2,17 @@ import './App.css';
 import { getSubdomain, DOMAIN } from 'helpers/get-tenant';
 import { useEffect } from 'react';
 
-const setDefaultStorage = () => {
+const simulateLogin = () => {
   const data = {
       accessToken: "98765tfdfgyu765tgffgvcderf45678jjkk878",
-      id: "98765"
+      id: "98765",
+      subDomain: '45323432'
   }
   localStorage.setItem('token', JSON.stringify(data));
+  return data;
 }
 
-const setStorageData = () => {
+const setStorageDataOnSiteLoad = () => {
   const url = window.location.href;
   let query = url.split('?token=')[1]
   if (query){
@@ -24,14 +26,13 @@ function App() {
   const domain = getSubdomain();
 
   useEffect(() => {
-    setStorageData();
+    setStorageDataOnSiteLoad();
   }, [])
 
   const handleLogin = () => {
-    setDefaultStorage();
-    const sub = '45323432';
+    const loginData = simulateLogin();
     const token = localStorage.getItem('token');
-    window.location.href = `http://${sub}.${DOMAIN}/?token=${token}`;
+    window.location.href = `http://${loginData.subDomain}.${DOMAIN}/?token=${token}`;
   }
 
   return (
